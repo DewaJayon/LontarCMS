@@ -37,14 +37,16 @@ jobs:
           extensions: mbstring, bcmath, pdo_mysql, curl, intl, gd, zip, sodium
           coverage: none
 
+      - name: Setup Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
       - name: Copy .env.example to .env
         run: cp .env.example .env
 
       - name: Generate application key
+        env:
+          APP_ENV: testing
         run: php artisan key:generate
-
-      - name: Setup Composer dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Setup Node and build assets
         uses: actions/setup-node@v4
