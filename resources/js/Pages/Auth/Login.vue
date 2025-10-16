@@ -102,7 +102,7 @@ const showPassword = (element) => {
                                     </span>
                                 </div>
                             </div>
-                            <div class="block">
+                            <div class="flex items-center gap-2">
                                 <Checkbox
                                     class="cursor-pointer"
                                     id="remember"
