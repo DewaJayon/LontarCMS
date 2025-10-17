@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\StoreUserRequest;
 use App\Http\Requests\Dashboard\UpdateUserRequest;
@@ -18,6 +19,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('per_page', 10);
+        $userRoles = UserRoleEnum::options();
 
         $users = User::query()
             ->when($request->input('search'), function ($query, $search) {
@@ -30,7 +32,8 @@ class UserController extends Controller
             ->withQueryString();
 
         return Inertia::render('User/Index', [
-            'users' => $users
+            'users'     => $users,
+            'userRoles' => $userRoles,
         ]);
     }
 

@@ -1,6 +1,10 @@
 <script setup>
 import DashboardLayout from "@/Layouts/DashboardLayout.vue";
 import { Head, Link } from "@inertiajs/vue3";
+import { Separator } from "@/Components/ui/separator";
+import { DataTable } from "@/Components/ui/data-table";
+import { userColumns } from "./Partials/userColumn";
+import UserCreateForm from "./Form/UserCreateForm.vue";
 
 import {
     Breadcrumb,
@@ -10,11 +14,22 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/Components/ui/breadcrumb";
+
+const props = defineProps({
+    users: {
+        type: Object,
+        required: true,
+    },
+    userRoles: {
+        type: Array,
+        required: true,
+    },
+});
 </script>
 
 <template>
     <Head>
-        <title>Dashboard</title>
+        <title>User</title>
     </Head>
 
     <DashboardLayout>
@@ -34,15 +49,23 @@ import {
             </Breadcrumb>
         </template>
 
-        <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div class="aspect-video rounded-xl bg-muted/50" />
-                <div class="aspect-video rounded-xl bg-muted/50" />
-                <div class="aspect-video rounded-xl bg-muted/50" />
+        <div class="flex flex-1 flex-col gap-4 p-4">
+            <div class="rounded-xl bg-muted/50 h-full p-4">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-semibold">User</h4>
+                    <UserCreateForm />
+                </div>
+                <Separator class="my-4" />
+
+                <div class="mt-4">
+                    <DataTable
+                        :data="users.data"
+                        :columns="userColumns"
+                        :route-name="'users.index'"
+                        :pagination="users"
+                    />
+                </div>
             </div>
-            <div
-                class="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-full"
-            />
         </div>
     </DashboardLayout>
 </template>
