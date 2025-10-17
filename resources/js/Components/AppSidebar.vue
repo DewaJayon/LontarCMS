@@ -23,13 +23,13 @@ const general = [
         title: "Dashboard",
         routeName: "home",
         icon: LayoutDashboard,
-        // roles: ["admin", "staff"],
+        roles: ["admin", "staff"],
     },
     {
         title: "User",
-        routeName: "#",
+        routeName: "users.index",
         icon: UserRound,
-        // roles: ["admin"],
+        roles: ["admin"],
     },
 ];
 </script>
